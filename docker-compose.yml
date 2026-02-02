@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:15
+    container_name: biopass_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: biopass_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./biopass_dao/db/create_tables.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  postgres_data:
